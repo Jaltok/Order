@@ -11,7 +11,7 @@ class BST(object):
 def insert(val, parent):
     if val == parent.val:
         return
-    if val < parent.val: 
+    elif val < parent.val: 
         if parent.left:
             insert(val, parent.left)
         else:
@@ -25,39 +25,53 @@ def insert(val, parent):
 # Prints pre order traversal of BST
 def preOrder(parent):
     print(parent.val, end=' ')
-    
     if parent.left != None:
         preOrder(parent.left)
-    
     if parent.right != None:
         preOrder(parent.right)
+    return
 
 # Prints in order traversal of BST
 def inOrder(parent):
     if parent.left != None:
         inOrder(parent.left)
-    
     print(parent.val, end=' ')
-    
     if parent.right != None:
         inOrder(parent.right)
+    return
 
 # Prints post order traversal of BST
 def postOrder(parent):
     if parent.left != None:
         postOrder(parent.left)
-    
     if parent.right != None:
         postOrder(parent.right)
-    
     print(parent.val, end=' ')
+    return
+
+def printLeft(parent):
+    while(parent.left != None):
+        parent = parent.left
+    print("Left most value is: ")
+    print(parent.val)
+   
+def printRight(parent):
+    while(parent.right != None):
+        parent = parent.right
+    print("Right most value is: ")
+    print(parent.val)
+    return
 
 f = open("test", "r")
-root = BST(f.readline().strip()) # Creating head of tree
+root = BST(int(f.readline().strip())) # Creating head of tree
 buf = f.readlines()
 
 for x in buf:
-    insert(x.strip(), root)
+    insert(int(x.strip()), root)
+
+printLeft(root)
+printRight(root)
+print("Printing Tree")
 
 print("Pre order: ", end=' ' )
 preOrder(root)
